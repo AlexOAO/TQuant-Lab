@@ -12,11 +12,16 @@
 # 4. 回測與績效視覺化
 #
 # 參考md檔說明，並補充註解與結構優化。
-
+import os
 import tejapi
+import pandas as pd
+import numpy as np
 # === 1. 下載與處理資料 ===
-tejapi.ApiConfig.api_key = "Your Key"  # 請填入TEJ API金鑰
-tejapi.ApiConfig.api_base = "Your Base"  # 請填入TEJ API網址
+os.environ['TEJAPI_KEY'] = ''
+os.environ['TEJAPI_BASE'] = ''
+tejapi.ApiConfig.api_key = os.environ['TEJAPI_KEY']
+tejapi.ApiConfig.api_base = os.environ['TEJAPI_BASE']
+tejapi.ApiConfig.ignoretz = True
 
 # 下載景氣分數資料 (如SCORE)
 data = tejapi.get('GLOBAL/ANMAR', mdate={'gte':'2000-01-01', 'lte':'2025-04-09'}, coid = 'EA1101')
